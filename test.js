@@ -40,3 +40,9 @@ test('concurrency: 4', async t => {
 test('handles empty iterable', async t => {
 	t.deepEqual(await m([], mapper), []);
 });
+
+test('thunk form', async t => {
+	const end = timeSpan();
+	t.deepEqual(await (m.thunk(mapper)(input)), [10, 20, 30]);
+	t.true(inRange(end(), 290, 330));
+});
